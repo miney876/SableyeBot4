@@ -49,9 +49,9 @@ jobs:
 
     - name: Check for syntax errors
       run: |
-        node -c server/index.js
-        node -c server/updateCommands.js
-        node -c server/deleteCommands.js
+        node --check server/index.js
+        node --check server/updateCommands.js
+        node --check server/deleteCommands.js
         echo "Syntax check passed"
 
     - name: Build website
@@ -59,4 +59,3 @@ jobs:
         cd website
         npm run build-docs
         echo "Website built successfully"
-
