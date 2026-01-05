@@ -6,7 +6,7 @@ Competitive Pokémon Discord Bot, rewritten from the ground up.
 
 ## Installation
 
-SableyeBot v4 requires NodeJS v16.
+SableyeBot v4 requires Node.js v24.x.
 
 Follow these steps to run your own local copy:
 
@@ -18,7 +18,7 @@ Follow these steps to run your own local copy:
 6. Run `npm run debug` to run the application proper.
     - You should use `ngrok` or simlar to get this working in a test
       environment that isn't directly exposed to the internet.
-7. For production use, install `pm2` and run `npm run pm2-start`.
+7. For production use, install `pm2` and run `pm2 start npm -- start`.
 
 ## Issues
 
