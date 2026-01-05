@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [ release ]
+  pull_request:
+    branches: [ release ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [24.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: |
+          package-lock.json
+          server/package-lock.json
+          website/package-lock.json
+
+    - name: Install root dependencies
+      run: npm ci
+
+    - name: Install server dependencies
+      run: |
+        cd server
+        npm ci
+
+    - name: Install website dependencies
+      run: |
+        cd website
+        npm ci
+
+    - name: Verify installation
+      run: |
+        node --version
+        npm --version
+        echo "Dependencies installed successfully"
+
+    - name: Check for syntax errors
+      run: |
+        node -c server/index.js
+        node -c server/updateCommands.js
+        node -c server/deleteCommands.js
+        echo "Syntax check passed"
+
+    - name: Build website
+      run: |
+        cd website
+        npm run build-docs
+        echo "Website built successfully"
+
