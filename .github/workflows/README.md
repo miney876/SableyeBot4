@@ -38,9 +38,9 @@ cd server && npm ci && cd ..
 cd website && npm ci && cd ..
 
 # Check syntax
-node -c server/index.js
-node -c server/updateCommands.js
-node -c server/deleteCommands.js
+node --check server/index.js
+node --check server/updateCommands.js
+node --check server/deleteCommands.js
 
 # Build website
 cd website && npm run build-docs
