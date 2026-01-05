@@ -1,4 +1,5 @@
 .env
 **/node_modules/
 /server/src/modules/init-admin/key.json
+website/_site/
 
